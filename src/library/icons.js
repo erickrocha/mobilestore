@@ -8,6 +8,7 @@ import {
     faServer,
     faBeer,
     faIceCream,
+    faCartPlus,
 } from '@fortawesome/free-solid-svg-icons'
 
 library.add(
@@ -17,5 +18,6 @@ library.add(
     faAngleRight,
     faServer,
     faBeer,
-    faIceCream
+    faIceCream,
+    faCartPlus
 )
