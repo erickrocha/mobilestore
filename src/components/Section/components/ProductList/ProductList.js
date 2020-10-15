@@ -3,11 +3,11 @@ import { StyleSheet, View } from 'react-native'
 import { Product } from './components'
 
 const ProductList = (props) => {
-    const { items } = props
+    const { items, navigation } = props
     return (
         <View style={styles.root}>
             {items.map((product) => (
-                <Product product={product} />
+                <Product product={product} navigation={navigation} />
             ))}
         </View>
     )

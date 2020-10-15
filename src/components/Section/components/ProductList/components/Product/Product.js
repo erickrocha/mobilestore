@@ -14,15 +14,12 @@ import { TouchableHighlight } from 'react-native-gesture-handler'
 const LeftContent = (props) => <Avatar.Icon {...props} icon="folder" />
 
 const Product = (props) => {
-    const { product } = props
+    const { product, navigation } = props
 
     return (
         <Card key={product.uuid} style={styles.root}>
             <Card.Title title={product.name} />
-            <Card.Cover
-                style={styles.image}
-                source={{ uri: product.showcase }}
-            />
+            <Card.Cover source={{ uri: product.showcase }} />
             <Card.Content>
                 <Paragraph>{product.description}</Paragraph>
             </Card.Content>
@@ -35,7 +32,7 @@ const Product = (props) => {
                     activeOpacity={0.6}
                     underlayColor="#DDDDDD"
                     onPress={() =>
-                        alert((product.priceInCents / 100).toFixed(2))
+                        navigation.navigate('Detail', { product: product })
                     }
                 >
                     <View style={styles.addcart}>

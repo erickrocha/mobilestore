@@ -6,6 +6,7 @@ import thunk from 'redux-thunk'
 import { createStackNavigator } from '@react-navigation/stack'
 import { NavigationContainer } from '@react-navigation/native'
 import Showcase from './screens/Showcase'
+import ProductDetail from './screens/ProductDetail'
 import showcaseReducer from './redux/showcase/showcase.reducer'
 
 import { library } from '@fortawesome/fontawesome-svg-core'
@@ -37,6 +38,13 @@ const App = () => {
                 <NavigationContainer>
                     <Stack.Navigator>
                         <Stack.Screen name="Showcase" component={Showcase} />
+                        <Stack.Screen
+                            name="Detail"
+                            component={ProductDetail}
+                            options={({ route }) => ({
+                                title: route.params.product.name,
+                            })}
+                        />
                     </Stack.Navigator>
                 </NavigationContainer>
             </PaperProvider>

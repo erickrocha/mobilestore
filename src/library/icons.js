@@ -9,6 +9,8 @@ import {
     faBeer,
     faIceCream,
     faCartPlus,
+    faPlusCircle,
+    faMinusCircle,
 } from '@fortawesome/free-solid-svg-icons'
 
 library.add(
@@ -19,5 +21,7 @@ library.add(
     faServer,
     faBeer,
     faIceCream,
-    faCartPlus
+    faCartPlus,
+    faPlusCircle,
+    faMinusCircle
 )
