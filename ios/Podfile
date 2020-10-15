@@ -8,6 +8,8 @@ target 'mobilestore' do
 
   use_react_native!(:path => config["reactNativePath"])
 
+  pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
+
   target 'mobilestoreTests' do
     inherit! :complete
     # Pods for testing

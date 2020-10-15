@@ -1,0 +1,8 @@
+{
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true,
+  "editor.formatOnPaste": false,
+  "php.validate.enable": false,
+  "gulp.autoDetect": "off",
+  "grunt.autoDetect": "off"
+}
