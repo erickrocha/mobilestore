@@ -8,6 +8,7 @@ import { NavigationContainer } from '@react-navigation/native'
 import Showcase from './screens/Showcase'
 import ProductDetail from './screens/ProductDetail'
 import showcaseReducer from './redux/showcase/showcase.reducer'
+import cartReducer from './redux/cart/cart.reducer'
 
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { fab } from '@fortawesome/free-brands-svg-icons'
@@ -23,6 +24,7 @@ const composeEnhancers =
 
 const appReducer = combineReducers({
     showcase: showcaseReducer,
+    cart: cartReducer,
 })
 
 const store = createStore(appReducer, composeEnhancers(applyMiddleware(thunk)))
@@ -37,7 +39,11 @@ const App = () => {
             <PaperProvider>
                 <NavigationContainer>
                     <Stack.Navigator>
-                        <Stack.Screen name="Showcase" component={Showcase} />
+                        <Stack.Screen
+                            name="Showcase"
+                            component={Showcase}
+                            options={{ headerShown: false }}
+                        />
                         <Stack.Screen
                             name="Detail"
                             component={ProductDetail}

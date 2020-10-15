@@ -23,7 +23,7 @@ const Showcase = ({ navigation }) => {
             <ScrollView style={styles.root}>
                 {sections.map((section) => (
                     <Section
-                        key={section.uuid}
+                        key={section.id}
                         section={section}
                         navigation={navigation}
                     />

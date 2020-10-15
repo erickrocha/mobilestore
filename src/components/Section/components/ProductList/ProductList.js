@@ -7,7 +7,11 @@ const ProductList = (props) => {
     return (
         <View style={styles.root}>
             {items.map((product) => (
-                <Product product={product} navigation={navigation} />
+                <Product
+                    key={product.id}
+                    product={product}
+                    navigation={navigation}
+                />
             ))}
         </View>
     )

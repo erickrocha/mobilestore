@@ -17,7 +17,7 @@ const Product = (props) => {
     const { product, navigation } = props
 
     return (
-        <Card key={product.uuid} style={styles.root}>
+        <Card style={styles.root}>
             <Card.Title title={product.name} />
             <Card.Cover source={{ uri: product.showcase }} />
             <Card.Content>
