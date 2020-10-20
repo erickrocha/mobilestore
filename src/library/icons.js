@@ -11,6 +11,8 @@ import {
     faCartPlus,
     faPlusCircle,
     faMinusCircle,
+    faMoneyBillAlt,
+    faExchangeAlt,
 } from '@fortawesome/free-solid-svg-icons'
 
 library.add(
@@ -23,5 +25,7 @@ library.add(
     faIceCream,
     faCartPlus,
     faPlusCircle,
-    faMinusCircle
+    faMinusCircle,
+    faMoneyBillAlt,
+    faExchangeAlt
 )

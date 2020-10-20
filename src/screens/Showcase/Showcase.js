@@ -2,17 +2,9 @@ import React, { useEffect, useState } from 'react'
 import { FlatList, StyleSheet, Text, View } from 'react-native'
 import { useDispatch, useSelector } from 'react-redux'
 import * as handler from '../../redux/showcase/index'
-import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import { TouchableHighlight } from 'react-native-gesture-handler'
 import { Section } from '../../components'
 import Footer from './Footer'
-
-const Item = ({ title }) => (
-    <View style={styles.item}>
-        <Text style={styles.title}>{title}</Text>
-    </View>
-)
 
 const Showcase = ({ navigation }) => {
     const sections = useSelector((state) => state.showcase.sections)
