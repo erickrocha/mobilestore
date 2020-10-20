@@ -10,11 +10,14 @@ import {
     Divider,
 } from 'react-native-paper'
 import { TouchableHighlight } from 'react-native-gesture-handler'
+import { useNavigation } from '@react-navigation/native'
 
 const LeftContent = (props) => <Avatar.Icon {...props} icon="folder" />
 
 const Product = (props) => {
-    const { product, navigation } = props
+    const { product } = props
+
+    const navigation = useNavigation()
 
     return (
         <Card style={styles.root}>

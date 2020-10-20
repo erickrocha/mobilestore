@@ -7,6 +7,7 @@ import { createStackNavigator } from '@react-navigation/stack'
 import { NavigationContainer } from '@react-navigation/native'
 import Showcase from './screens/Showcase'
 import ProductDetail from './screens/ProductDetail'
+import Checkout from './screens/Checkout'
 import showcaseReducer from './redux/showcase/showcase.reducer'
 import cartReducer from './redux/cart/cart.reducer'
 
@@ -51,6 +52,7 @@ const App = () => {
                                 title: route.params.product.name,
                             })}
                         />
+                        <Stack.Screen name="Checkout" component={Checkout} />
                     </Stack.Navigator>
                 </NavigationContainer>
             </PaperProvider>

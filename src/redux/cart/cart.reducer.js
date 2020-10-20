@@ -5,6 +5,9 @@ const initialState = {
     loading: false,
     error: null,
     added: false,
+    itens: [],
+    totalItemsInGrams: 0.0,
+    totalInCents: 0,
 }
 
 const reducer = (state = initialState, payload) => {
