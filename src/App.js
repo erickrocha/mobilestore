@@ -10,6 +10,7 @@ import ProductDetail from './screens/ProductDetail'
 import Checkout from './screens/Checkout'
 import showcaseReducer from './redux/showcase/showcase.reducer'
 import cartReducer from './redux/cart/cart.reducer'
+import SplashScreen from 'react-native-splash-screen'
 
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { fab } from '@fortawesome/free-brands-svg-icons'
