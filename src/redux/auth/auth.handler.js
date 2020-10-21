@@ -1,8 +1,7 @@
 import axios from '../../axios.config'
 import * as action from './auth.action'
 import * as dateHandler from '../../library/date-service'
-import AsyncStorage from '@react-native-community/async-storage'
-import * as constants from '../../library/constants'
+import * as storageService from '../../library/storage-service'
 
 const error = (error) => {
     return {
@@ -25,9 +24,9 @@ export const authetication = (email, password) => {
                 const expirationDate = dateHandler
                     .getToday()
                     .add(response.data.expireIn, 'ms')
-                AsyncStorage.setItem(constants.TOKEN, response.data.token)
-                AsyncStorage.setItem(
-                    constants.EXPIRATION_DATE,
+                storageService.setItem('@token', response.data.token)
+                storageService.setItem(
+                    '@expiration_date',
                     expirationDate.format(dateHandler.ISO_DATE_TIME)
                 )
                 dispatch({ type: action.SIGNIN, token: response.data.token })
@@ -39,24 +38,27 @@ export const authetication = (email, password) => {
 }
 
 export const logout = () => {
-    AsyncStorage.removeItem(constants.TOKEN)
-    AsyncStorage.removeItem(constants.EXPIRATION_DATE)
+    storageService.removeItem('@token')
+    storageService.removeItem('expiration_date')
 }
 
 export const isAlreadyLogged = () => {
-    const token = AsyncStorage.getItem(constants.TOKEN)
-    const expirationDate = dateHandler.getDateTime(
-        AsyncStorage.getItem(constants.EXPIRATION_DATE)
-    )
-    if (
-        token !== null &&
-        expirationDate.isValid() &&
-        expirationDate.isAfter(dateService.getTodayNow())
-    ) {
-        return true
-    } else {
-        AsyncStorage.removeItem(constants.TOKEN)
-        AsyncStorage.removeItem(constants.EXPIRATION_DATE)
-        return false
+    return (dispatch) => {
+        dispatch({ type: action.AUTH_BEGIN })
+        const token = storageService.getItem('@token')
+        const expirationDate = dateHandler.getDateTime(
+            storageService.getItem('@expiration_date')
+        )
+        if (
+            token !== null &&
+            expirationDate.isValid() &&
+            expirationDate.isAfter(dateService.getTodayNow())
+        ) {
+            dispatch({ type: action.SIGNIN, token: token })
+        } else {
+            storageService.removeItem('@token')
+            storageService.removeItem('@expiration_date')
+            dispatch({ type: action.REQUIRE_AUTHENTICATION })
+        }
     }
 }

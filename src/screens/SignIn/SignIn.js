@@ -18,16 +18,19 @@ const SignIn = (props) => {
         <SafeAreaView style={styles.root}>
             <View style={styles.container}>
                 <Input
-                    textContentType="emailAddress"
                     value={email}
                     placeholder="Email"
-                    onChangeText={(text) => setEmail(text)}
+                    autoCapitalize="none"
+                    autoCorrect={false}
+                    onChangeText={setEmail}
                 />
                 <Input
-                    textContentType="password"
+                    secureTextEntry={true}
                     value={password}
                     placeholder="Password"
-                    onChangeText={(text) => setPassword(text)}
+                    autoCapitalize="none"
+                    autoCorrect={false}
+                    onChangeText={setPassword}
                 />
                 <Button
                     titleStyle={{ fontSize: 25 }}

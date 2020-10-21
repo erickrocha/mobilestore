@@ -13,6 +13,8 @@ const reducer = (state = initialState, payload) => {
             return updateObject(state, { error: null, loading: true })
         case action.SIGNIN:
             return updateObject(state, { loading: false, token: payload.token })
+        case action.REQUIRE_AUTHENTICATION:
+            return updateObject(state, { loading: false, token: null })
         case action.AUTH_ERROR:
             return updateObject(state, { error: payload.error, loading: false })
         default:
