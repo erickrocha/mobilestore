@@ -3,7 +3,9 @@ import { StatusBar, StyleSheet, Text, View } from 'react-native'
 import { ScrollView, TouchableHighlight } from 'react-native-gesture-handler'
 import { Card, Divider, Paragraph, Title } from 'react-native-paper'
 import { SafeAreaView } from 'react-native-safe-area-context'
+import { useDispatch, useSelector } from 'react-redux'
 import { InputNumber } from '../../components'
+import * as handler from '../../redux/cart/index'
 
 const ProductDetail = ({ route, navigation }) => {
     const { product } = route.params
@@ -19,6 +21,18 @@ const ProductDetail = ({ route, navigation }) => {
     const handleSubtract = () => {
         setAmount(amount - product.priceInCents)
         setQuantity(quantity - 1)
+    }
+
+    const dispatch = useDispatch()
+
+    const addItem = () => {
+        const cartData = { [product.id]: quantity }
+        dispatch(handler.addItem(cartData))
+    }
+
+    const added = useSelector((state) => state.cart.added)
+    if (added) {
+        navigation.goBack()
     }
 
     return (
@@ -49,7 +63,7 @@ const ProductDetail = ({ route, navigation }) => {
                 <TouchableHighlight
                     activeOpacity={0.6}
                     underlayColor="#DDDDDD"
-                    onPress={() => alert('OK')}
+                    onPress={() => addItem()}
                     style={styles.button}
                 >
                     <Text style={styles.buttonText}>

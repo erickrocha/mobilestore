@@ -1,42 +1,60 @@
 import React, { useEffect, useState } from 'react'
-import { StyleSheet, Text, View } from 'react-native'
-import { List } from 'react-native-paper'
+import { FlatList, StyleSheet, Text, View } from 'react-native'
 import { useDispatch, useSelector } from 'react-redux'
 import * as handler from '../../redux/showcase/index'
-import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
+import * as cartHandler from '../../redux/cart/index'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import { ScrollView } from 'react-native-gesture-handler'
 import { Section } from '../../components'
+import Footer from './Footer'
 
 const Showcase = ({ navigation }) => {
     const sections = useSelector((state) => state.showcase.sections)
-    const [expanded, setExpanded] = useState(true)
+
+    const cart = useSelector((state) => state.cart)
+
+    const renderItem = ({ item }) => <Section section={item} />
 
     const dispatch = useDispatch()
-
     useEffect(() => {
         dispatch(handler.get())
     }, [])
 
+    useEffect(() => {
+        dispatch(cartHandler.get())
+    }, [])
+
+    const footer =
+        cart && cart.items && cart.items.length > 0 ? (
+            <Footer
+                totalInCents={cart.totalInCents}
+                totalItemsInGrams={cart.totalItemsInGrams}
+            />
+        ) : null
+
     return (
         <SafeAreaView style={styles.root}>
-            <ScrollView style={styles.root}>
-                {sections.map((section) => (
-                    <Section
-                        key={section.uuid}
-                        section={section}
-                        navigation={navigation}
-                    />
-                ))}
-            </ScrollView>
+            <FlatList
+                data={sections}
+                renderItem={renderItem}
+                keyExtractor={(item) => item.id}
+            />
+            {footer}
         </SafeAreaView>
     )
 }
 
 const styles = StyleSheet.create({
     root: {
-        backgroundColor: 'lightgray',
-        flexGrow: 1,
+        flex: 1,
+    },
+    item: {
+        backgroundColor: '#f9c2ff',
+        padding: 20,
+        marginVertical: 8,
+        marginHorizontal: 16,
+    },
+    title: {
+        fontSize: 32,
     },
 })
 
