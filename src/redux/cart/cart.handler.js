@@ -22,3 +22,17 @@ export const addItem = (params) => {
             })
     }
 }
+
+export const get = () => {
+    return (dispacth) => {
+        dispacth({ type: action.CART_BEGIN })
+        axios
+            .get('/api/cart')
+            .then((response) => {
+                dispacth({ type: action.GET_CART, cart: response.data })
+            })
+            .catch((err) => {
+                dispacth(error(err.response.data))
+            })
+    }
+}

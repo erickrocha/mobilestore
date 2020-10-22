@@ -5,8 +5,8 @@ const instance = axios.create({
     headers: { 'Content-Type': 'application/json' },
 })
 
-instance.interceptors.request.use((config) => {
-    const token = storageService.getItem('@token')
+instance.interceptors.request.use(async (config) => {
+    const token = await storageService.getItem('@token')
     if (token) {
         config.headers.Authorization = token
     }

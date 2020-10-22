@@ -1,37 +1,39 @@
-import EncryptedStorage from 'react-native-encrypted-storage'
-
-export const setItem = async (key, value) => {
-    try {
-        await EncryptedStorage.setItem(key, JSON.stringify(value))
-    } catch (error) {
-        console.log(`error trying to save ${key} . error: ${error}`)
-    }
-}
+import AsyncStorage from '@react-native-community/async-storage'
 
 export const getItem = async (key) => {
-    try {
-        const value = await EncryptedStorage.getItem(key)
-        if (value !== undefined) {
-            return value
-        }
-        return null
-    } catch (err) {
-        console.log(`error trying to read ${key} . error: ${error}`)
-    }
+    return await AsyncStorage.getItem(key)
 }
 
-export const clear = async () => {
-    try {
-        await EncryptedStorage.clear()
-    } catch (error) {
-        console.log(`error trying to clean storage. error: ${error}`)
-    }
+export const setItem = async (key, value) => {
+    await AsyncStorage.setItem(key, value)
+}
+
+export const setObject = async (key, value) => {
+    await AsyncStorage.setItem(key, JSON.stringify(value))
+}
+
+export const getObject = async (key) => {
+    const obejct = await AsyncStorage.getItem(key)
+    return JSON.parse(obejct)
 }
 
 export const removeItem = async (key) => {
-    try {
-        await EncryptedStorage.removeItem(key)
-    } catch (error) {
-        console.log(`error trying to remove ${key}. error: ${error}`)
-    }
+    await AsyncStorage.removeItem(key)
+}
+
+export const getAllKeys = async () => {
+    await AsyncStorage.getAllKeys()
+}
+
+export const getAllValues = async () => {
+    const keys = getAllKeys()
+    return await AsyncStorage.multiGet(keys)
+}
+
+export const getItems = async (keys) => {
+    return await AsyncStorage.multiGet(keys)
+}
+
+export const clear = async () => {
+    await AsyncStorage.clear()
 }

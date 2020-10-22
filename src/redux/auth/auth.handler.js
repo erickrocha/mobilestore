@@ -45,20 +45,22 @@ export const logout = () => {
 export const isAlreadyLogged = () => {
     return (dispatch) => {
         dispatch({ type: action.AUTH_BEGIN })
-        const token = storageService.getItem('@token')
-        const expirationDate = dateHandler.getDateTime(
-            storageService.getItem('@expiration_date')
-        )
-        if (
-            token !== null &&
-            expirationDate.isValid() &&
-            expirationDate.isAfter(dateService.getTodayNow())
-        ) {
-            dispatch({ type: action.SIGNIN, token: token })
-        } else {
-            storageService.removeItem('@token')
-            storageService.removeItem('@expiration_date')
-            dispatch({ type: action.REQUIRE_AUTHENTICATION })
-        }
+        storageService
+            .getItems(['@token', '@expiration_date'])
+            .then((values) => {
+                const token = values[0][1]
+                const expirationDate = dateHandler.getDateTime(values[1][1])
+                if (
+                    token !== null &&
+                    expirationDate.isValid() &&
+                    expirationDate.isAfter(dateHandler.getTodayNow())
+                ) {
+                    dispatch({ type: action.SIGNIN, token: token })
+                } else {
+                    storageService.removeItem('@token')
+                    storageService.removeItem('@expiration_date')
+                    dispatch({ type: action.REQUIRE_AUTHENTICATION })
+                }
+            })
     }
 }

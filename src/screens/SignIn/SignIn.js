@@ -1,12 +1,14 @@
 import React, { useState } from 'react'
-import { SafeAreaView, StyleSheet, View } from 'react-native'
-import { Input, Button } from 'react-native-elements'
+import { SafeAreaView, StyleSheet, Text, View } from 'react-native'
+import { Input, Button, Icon } from 'react-native-elements'
 import { useDispatch } from 'react-redux'
+import { updateObject } from '../../library/utility'
 import * as handler from '../../redux/auth/index'
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 
-const SignIn = (props) => {
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
+const SignIn = ({ navigation }) => {
+    const [authData, setAuthData] = useState({})
+    const [secure, setSecure] = useState(true)
 
     const dispatch = useDispatch()
 
@@ -18,26 +20,51 @@ const SignIn = (props) => {
         <SafeAreaView style={styles.root}>
             <View style={styles.container}>
                 <Input
-                    value={email}
+                    rightIcon={<Icon name="email" size={36} color="green" />}
+                    value={authData.email}
                     placeholder="Email"
                     autoCapitalize="none"
                     autoCorrect={false}
-                    onChangeText={setEmail}
+                    onChangeText={(text) =>
+                        setAuthData(updateObject(authData, { email: text }))
+                    }
                 />
                 <Input
-                    secureTextEntry={true}
-                    value={password}
+                    rightIcon={
+                        <FontAwesomeIcon
+                            icon={['fa', 'eye']}
+                            onPress={() => setSecure(!secure)}
+                            size={36}
+                        />
+                    }
+                    secureTextEntry={secure}
+                    value={authData.password}
                     placeholder="Password"
                     autoCapitalize="none"
                     autoCorrect={false}
-                    onChangeText={setPassword}
+                    onChangeText={(text) =>
+                        setAuthData(updateObject(authData, { password: text }))
+                    }
                 />
                 <Button
+                    disabled={!authData.email || !authData.password}
                     titleStyle={{ fontSize: 25 }}
                     buttonStyle={{ padding: 20 }}
                     containerStyle={styles.buttonContaiter}
                     title="Entrar"
                     onPress={() => login()}
+                />
+                <Text>OU</Text>
+                <Button
+                    titleStyle={{ fontSize: 25 }}
+                    buttonStyle={{
+                        padding: 20,
+                        justifyContent: 'space-evenly',
+                    }}
+                    containerStyle={styles.buttonContaiter}
+                    title="Cadastrar"
+                    type="outline"
+                    onPress={() => navigation.navigate('SignUp')}
                 />
             </View>
         </SafeAreaView>
