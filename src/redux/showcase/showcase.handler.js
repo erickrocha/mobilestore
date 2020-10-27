@@ -13,7 +13,7 @@ export const get = () => {
     return (dispatch) => {
         dispatch({ type: action.SHOWCASE_BEGIN })
         axios
-            .get('/api/showcase')
+            .get('/mobile/showcase')
             .then((response) => {
                 dispatch({ type: action.GET_SHOWCASE, showcase: response.data })
             })

@@ -18,6 +18,8 @@ const reducer = (state = initialState, payload) => {
             return updateObject(state, { error: payload.error, added: false })
         case action.ITEM_ADDED:
             return updateObject(state, { ...payload.cart, added: true })
+        case action.GET_CART:
+            return updateObject(state, { ...payload.cart, loading: false })
         default:
             return state
     }

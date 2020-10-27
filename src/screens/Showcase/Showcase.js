@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { FlatList, StyleSheet, Text, View } from 'react-native'
 import { useDispatch, useSelector } from 'react-redux'
 import * as handler from '../../redux/showcase/index'
+import * as cartHandler from '../../redux/cart/index'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { Section } from '../../components'
 import Footer from './Footer'
@@ -16,6 +17,10 @@ const Showcase = ({ navigation }) => {
     const dispatch = useDispatch()
     useEffect(() => {
         dispatch(handler.get())
+    }, [])
+
+    useEffect(() => {
+        dispatch(cartHandler.get())
     }, [])
 
     const footer =

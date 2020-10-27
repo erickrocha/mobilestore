@@ -13,6 +13,8 @@ import {
     faMinusCircle,
     faMoneyBillAlt,
     faExchangeAlt,
+    faUserCircle,
+    faEye,
 } from '@fortawesome/free-solid-svg-icons'
 
 library.add(
@@ -27,5 +29,7 @@ library.add(
     faPlusCircle,
     faMinusCircle,
     faMoneyBillAlt,
-    faExchangeAlt
+    faExchangeAlt,
+    faUserCircle,
+    faEye
 )

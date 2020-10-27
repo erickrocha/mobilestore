@@ -1,12 +1,91 @@
-import React from 'react'
-import { StyleSheet, View } from 'react-native'
+import React, { useState } from 'react'
+import { SafeAreaView, StyleSheet, Text, View } from 'react-native'
+import { Input, Button, Icon } from 'react-native-elements'
+import { useDispatch } from 'react-redux'
+import * as handler from '../../redux/auth/index'
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
+import { clientId } from '../../../app.json'
 
-const SignIn = (props) => {
-    return <View style={styles.root}></View>
+const SignIn = ({ route, navigation }) => {
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState()
+    const [secure, setSecure] = useState(true)
+
+    const dispatch = useDispatch()
+
+    const login = () => {
+        dispatch(handler.authetication(email, password, clientId))
+    }
+
+    if (route.params?.email && route.params?.password) {
+        setEmail(route.params?.email)
+        setPassword(route.params?.password)
+        login()
+    }
+
+    return (
+        <SafeAreaView style={styles.root}>
+            <View style={styles.container}>
+                <Input
+                    rightIcon={<Icon name="email" size={36} color="green" />}
+                    value={email}
+                    placeholder="Email"
+                    autoCapitalize="none"
+                    autoCorrect={false}
+                    onChangeText={setEmail}
+                />
+                <Input
+                    rightIcon={
+                        <FontAwesomeIcon
+                            icon={['fa', 'eye']}
+                            onPress={() => setSecure(!secure)}
+                            size={36}
+                        />
+                    }
+                    secureTextEntry={secure}
+                    value={password}
+                    placeholder="Password"
+                    autoCapitalize="none"
+                    autoCorrect={false}
+                    onChangeText={setPassword}
+                />
+                <Button
+                    disabled={!email || !password}
+                    titleStyle={{ fontSize: 25 }}
+                    buttonStyle={{ padding: 20 }}
+                    containerStyle={styles.buttonContaiter}
+                    title="Entrar"
+                    onPress={() => login()}
+                />
+                <Text>OU</Text>
+                <Button
+                    titleStyle={{ fontSize: 25 }}
+                    buttonStyle={{
+                        padding: 20,
+                        justifyContent: 'space-evenly',
+                    }}
+                    containerStyle={styles.buttonContaiter}
+                    title="Cadastrar"
+                    type="outline"
+                    onPress={() => navigation.navigate('SignUp')}
+                />
+            </View>
+        </SafeAreaView>
+    )
 }
 
 const styles = StyleSheet.create({
     root: {
+        flexGrow: 1,
+    },
+    container: {
+        padding: 15,
+        flexGrow: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    buttonContaiter: {
+        width: '100%',
         padding: 15,
     },
 })

@@ -1,0 +1,6 @@
+export const AUTH_BEGIN = 'AUTH_BEGIN'
+export const AUTH_ERROR = 'AUTH_ERROR'
+export const SIGNIN = 'SIGNIN'
+export const SIGNUP = 'SIGNUP'
+export const ALREADY_SIGNED = 'ALREADY_SIGNED'
+export const REQUIRE_AUTHENTICATION = 'REQUIRE_AUTHENTICATION'
