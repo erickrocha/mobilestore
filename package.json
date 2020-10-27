@@ -38,7 +38,7 @@
     "react-redux": "^7.2.1",
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
-    "validate": "^5.1.0"
+    "validate.js": "^0.13.1"
   },
   "devDependencies": {
     "@babel/core": "^7.11.6",
@@ -60,7 +60,8 @@
     "metro-react-native-babel-preset": "^0.63.0",
     "prettier": "^2.1.2",
     "react-test-renderer": "16.13.1",
-    "redux-devtools": "^3.7.0"
+    "redux-devtools": "^3.7.0",
+    "redux-devtools-extension": "^2.13.8"
   },
   "husky": {
     "hooks": {

@@ -2,18 +2,25 @@ import React, { useState } from 'react'
 import { SafeAreaView, StyleSheet, Text, View } from 'react-native'
 import { Input, Button, Icon } from 'react-native-elements'
 import { useDispatch } from 'react-redux'
-import { updateObject } from '../../library/utility'
 import * as handler from '../../redux/auth/index'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
+import { clientId } from '../../../app.json'
 
-const SignIn = ({ navigation }) => {
-    const [authData, setAuthData] = useState({})
+const SignIn = ({ route, navigation }) => {
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState()
     const [secure, setSecure] = useState(true)
 
     const dispatch = useDispatch()
 
     const login = () => {
-        dispatch(handler.authetication(email, password))
+        dispatch(handler.authetication(email, password, clientId))
+    }
+
+    if (route.params?.email && route.params?.password) {
+        setEmail(route.params?.email)
+        setPassword(route.params?.password)
+        login()
     }
 
     return (
@@ -21,13 +28,11 @@ const SignIn = ({ navigation }) => {
             <View style={styles.container}>
                 <Input
                     rightIcon={<Icon name="email" size={36} color="green" />}
-                    value={authData.email}
+                    value={email}
                     placeholder="Email"
                     autoCapitalize="none"
                     autoCorrect={false}
-                    onChangeText={(text) =>
-                        setAuthData(updateObject(authData, { email: text }))
-                    }
+                    onChangeText={setEmail}
                 />
                 <Input
                     rightIcon={
@@ -38,16 +43,14 @@ const SignIn = ({ navigation }) => {
                         />
                     }
                     secureTextEntry={secure}
-                    value={authData.password}
+                    value={password}
                     placeholder="Password"
                     autoCapitalize="none"
                     autoCorrect={false}
-                    onChangeText={(text) =>
-                        setAuthData(updateObject(authData, { password: text }))
-                    }
+                    onChangeText={setPassword}
                 />
                 <Button
-                    disabled={!authData.email || !authData.password}
+                    disabled={!email || !password}
                     titleStyle={{ fontSize: 25 }}
                     buttonStyle={{ padding: 20 }}
                     containerStyle={styles.buttonContaiter}

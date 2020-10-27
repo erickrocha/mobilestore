@@ -7,21 +7,19 @@ import App from './App'
 import showcaseReducer from './redux/showcase/showcase.reducer'
 import cartReducer from './redux/cart/cart.reducer'
 import authReducer from './redux/auth/auth.reducer'
+import customerReducer from './redux/customer/customer.reducer'
+import { composeWithDevTools } from 'redux-devtools-extension'
 
-import { setNavigator } from './navigationRef'
-
-const composeEnhancers =
-    (process.env.NODE_ENV === 'development'
-        ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({
-              trace: true,
-              traceLimit: 25,
-          })
-        : null) || compose
+const composeEnhancers = composeWithDevTools({
+    trace: true,
+    traceLimit: 25,
+})
 
 const appReducer = combineReducers({
     auth: authReducer,
     showcase: showcaseReducer,
     cart: cartReducer,
+    customer: customerReducer,
 })
 
 const store = createStore(appReducer, composeEnhancers(applyMiddleware(thunk)))
@@ -29,7 +27,7 @@ const store = createStore(appReducer, composeEnhancers(applyMiddleware(thunk)))
 const Redux = (props) => {
     return (
         <StoreProvider store={store}>
-            <App ret={(navigator) => setNavigator(navigator)} />
+            <App />
         </StoreProvider>
     )
 }

@@ -11,12 +11,13 @@ const error = (error) => {
     }
 }
 
-export const authetication = (email, password) => {
+export const authetication = (email, password, clientId) => {
     return (dispatch) => {
         dispatch({ type: action.AUTH_BEGIN })
         const authData = {
             email: email,
             password: password,
+            company: clientId,
         }
         axios
             .post('/login', authData)
