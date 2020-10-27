@@ -16,7 +16,7 @@ import { fas } from '@fortawesome/free-solid-svg-icons'
 
 import * as handler from './redux/auth/index'
 import { useDispatch, useSelector } from 'react-redux'
-import * as storageService from './library/storage-service'
+import { navigationRef } from './NavigationRef'
 
 const Stack = createStackNavigator()
 
@@ -24,8 +24,6 @@ library.add(fab, fas)
 
 const App = () => {
     const dispatch = useDispatch()
-
-    // storageService.clear();
 
     useEffect(() => {
         dispatch(handler.isAlreadyLogged())
@@ -35,7 +33,7 @@ const App = () => {
 
     return (
         <PaperProvider>
-            <NavigationContainer>
+            <NavigationContainer ref={navigationRef}>
                 <Stack.Navigator>
                     {isAlreadyLogged ? (
                         <>

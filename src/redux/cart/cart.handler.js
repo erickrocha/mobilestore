@@ -13,7 +13,7 @@ export const addItem = (params) => {
     return (dispacth) => {
         dispacth({ type: action.CART_BEGIN })
         axios
-            .post('/api/cart', params)
+            .post('/mobile/cart', params)
             .then((response) => {
                 dispacth({ type: action.ITEM_ADDED, cart: response.data })
             })
@@ -27,7 +27,7 @@ export const get = () => {
     return (dispacth) => {
         dispacth({ type: action.CART_BEGIN })
         axios
-            .get('/api/cart')
+            .get('/mobile/cart')
             .then((response) => {
                 dispacth({ type: action.GET_CART, cart: response.data })
             })
