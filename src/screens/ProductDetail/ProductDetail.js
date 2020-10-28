@@ -30,11 +30,6 @@ const ProductDetail = ({ route, navigation }) => {
         dispatch(handler.addItem(cartData))
     }
 
-    const added = useSelector((state) => state.cart.added)
-    if (added) {
-        navigation.goBack()
-    }
-
     return (
         <SafeAreaView style={styles.root}>
             <ScrollView

@@ -1,5 +1,6 @@
 import axios from '../../axios.config'
 import * as action from './cart.action'
+import * as navigation from '../../NavigationRef'
 
 const error = (error) => {
     return {
@@ -16,6 +17,7 @@ export const addItem = (params) => {
             .post('/mobile/cart', params)
             .then((response) => {
                 dispacth({ type: action.ITEM_ADDED, cart: response.data })
+                navigation.navigate('Showcase')
             })
             .catch((err) => {
                 dispacth(error(err.response.data))

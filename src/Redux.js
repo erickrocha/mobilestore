@@ -8,6 +8,8 @@ import showcaseReducer from './redux/showcase/showcase.reducer'
 import cartReducer from './redux/cart/cart.reducer'
 import authReducer from './redux/auth/auth.reducer'
 import customerReducer from './redux/customer/customer.reducer'
+import applicationReducer from './redux/application/application.reducer'
+
 import { composeWithDevTools } from 'redux-devtools-extension'
 
 const composeEnhancers = composeWithDevTools({
@@ -16,6 +18,7 @@ const composeEnhancers = composeWithDevTools({
 })
 
 const appReducer = combineReducers({
+    app: applicationReducer,
     auth: authReducer,
     showcase: showcaseReducer,
     cart: cartReducer,
