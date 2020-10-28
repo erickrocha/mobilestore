@@ -1,14 +1,15 @@
 import React, { useState } from 'react'
 import { SafeAreaView, StyleSheet, Text, View } from 'react-native'
 import { Input, Button, Icon } from 'react-native-elements'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import * as handler from '../../redux/auth/index'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { clientId } from '../../../app.json'
+import { FlashMessage } from '../../components'
 
 const SignIn = ({ route, navigation }) => {
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState()
+    const [email, setEmail] = useState(route.params?.email)
+    const [password, setPassword] = useState(route.params?.password)
     const [secure, setSecure] = useState(true)
 
     const dispatch = useDispatch()
@@ -17,14 +18,11 @@ const SignIn = ({ route, navigation }) => {
         dispatch(handler.authetication(email, password, clientId))
     }
 
-    if (route.params?.email && route.params?.password) {
-        setEmail(route.params?.email)
-        setPassword(route.params?.password)
-        login()
-    }
+    const saved = useSelector((state) => state.customer.saved)
 
     return (
         <SafeAreaView style={styles.root}>
+            {saved ? <FlashMessage /> : null}
             <View style={styles.container}>
                 <Input
                     rightIcon={<Icon name="email" size={36} color="green" />}
@@ -87,6 +85,13 @@ const styles = StyleSheet.create({
     buttonContaiter: {
         width: '100%',
         padding: 15,
+    },
+    info: {
+        padding: 15,
+        backgroundColor: '#228b22',
+        color: '#ffffff',
+        alignContent: 'center',
+        justifyContent: 'center',
     },
 })
 
