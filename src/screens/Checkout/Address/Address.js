@@ -1,17 +1,25 @@
 import React from 'react'
 import { StyleSheet, View } from 'react-native'
+import MapView, { PROVIDER_GOOGLE } from 'react-native-maps'
 
-const Address = (prosp) => {
-    return <View style={styles.root}></View>
+const Address = (props) => {
+    return (
+        <MapView
+            style={styles.root}
+            provider={PROVIDER_GOOGLE}
+            initialRegion={{
+                latitude: 37.78825,
+                longitude: -122.4324,
+                latitudeDelta: 0.0922,
+                longitudeDelta: 0.0421,
+            }}
+        />
+    )
 }
 
 const styles = StyleSheet.create({
     root: {
-        backgroundColor: 'yellow',
-        padding: 15,
-        borderColor: 'green',
-        borderStyle: 'solid',
-        borderWidth: 1,
+        width: '100%',
         height: 250,
     },
 })
