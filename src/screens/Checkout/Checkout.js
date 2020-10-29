@@ -1,7 +1,7 @@
 import React from 'react'
 import { StyleSheet, Text, View } from 'react-native'
+import { Divider } from 'react-native-elements'
 import { ScrollView } from 'react-native-gesture-handler'
-import { Divider } from 'react-native-paper'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { useSelector } from 'react-redux'
 import Address from './Address'

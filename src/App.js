@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react'
-import { Provider as PaperProvider } from 'react-native-paper'
 
 import { NavigationContainer } from '@react-navigation/native'
 
@@ -36,25 +35,23 @@ const App = () => {
     const isAlreadyLogged = useSelector((state) => state.auth.token != null)
 
     return (
-        <PaperProvider>
-            <NavigationContainer ref={navigationRef}>
-                {isAlreadyLogged ? (
-                    <Tab.Navigator>
-                        <Tab.Screen component={Home} name="Home" />
-                        <Tab.Screen component={Profile} name="Profile" />
-                    </Tab.Navigator>
-                ) : (
-                    <LoginStack.Navigator>
-                        <LoginStack.Screen
-                            name="SignIn"
-                            component={SignIn}
-                            options={{ headerShown: false }}
-                        />
-                        <LoginStack.Screen name="SignUp" component={SignUp} />
-                    </LoginStack.Navigator>
-                )}
-            </NavigationContainer>
-        </PaperProvider>
+        <NavigationContainer ref={navigationRef}>
+            {isAlreadyLogged ? (
+                <Tab.Navigator>
+                    <Tab.Screen component={Home} name="Home" />
+                    <Tab.Screen component={Profile} name="Profile" />
+                </Tab.Navigator>
+            ) : (
+                <LoginStack.Navigator>
+                    <LoginStack.Screen
+                        name="SignIn"
+                        component={SignIn}
+                        options={{ headerShown: false }}
+                    />
+                    <LoginStack.Screen name="SignUp" component={SignUp} />
+                </LoginStack.Navigator>
+            )}
+        </NavigationContainer>
     )
 }
 
