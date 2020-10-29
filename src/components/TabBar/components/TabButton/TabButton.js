@@ -30,10 +30,14 @@ const TabButton = (props) => {
             style={styles.root}
             activeOpacity={0.6}
             underlayColor="#DDDDDD"
-            onPress={() => onPress()}
-            onLongPress={() => onLongPress()}
         >
-            <Icon name={icon} color={color} size={size} />
+            <Icon
+                name={icon}
+                color={isFocused ? 'darkgreen' : color}
+                size={size}
+                onPress={() => onPress()}
+                onLongPress={() => onLongPress()}
+            />
         </TouchableOpacity>
     )
 }

@@ -12,44 +12,16 @@ const TabBar = ({ state, descriptors, navigation }) => {
 
     return (
         <View style={styles.root}>
-            <TabButton
-                icon="home"
-                size={32}
-                isFocused={state.index === 0}
-                navigation={navigation}
-                route={state.routes.find((current) => current.name === 'Home')}
-                descriptors={descriptors}
-            />
-            <TabButton
-                icon="search"
-                size={32}
-                isFocused={state.index === 1}
-                navigation={navigation}
-                route={state.routes.find(
-                    (current) => current.name === 'Search'
-                )}
-                descriptors={descriptors}
-            />
-            <TabButton
-                icon="receipt"
-                size={32}
-                isFocused={state.index === 2}
-                navigation={navigation}
-                route={state.routes.find(
-                    (current) => current.name === 'Orders'
-                )}
-                descriptors={descriptors}
-            />
-            <TabButton
-                icon="account-circle"
-                isFocused={state.index === 3}
-                size={32}
-                navigation={navigation}
-                route={state.routes.find(
-                    (current) => current.name === 'Profile'
-                )}
-                descriptors={descriptors}
-            />
+            {state.routes.map((route, index) => (
+                <TabButton
+                    key={index}
+                    icon={descriptors[route.key]?.options?.icon}
+                    size={32}
+                    isFocused={state.index === index}
+                    navigation={navigation}
+                    route={route}
+                />
+            ))}
         </View>
     )
 }

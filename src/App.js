@@ -45,10 +45,30 @@ const App = () => {
                     initialRouteName="Home"
                     tabBar={(props) => <TabBar {...props} />}
                 >
-                    <Tab.Screen component={Home} name="Home" Order={1} />
-                    <Tab.Screen component={Search} name="Search" Order={2} />
-                    <Tab.Screen component={Order} name="Orders" Order={3} />
-                    <Tab.Screen component={Profile} name="Profile" Order={4} />
+                    <Tab.Screen
+                        component={Home}
+                        name="Home"
+                        Order={1}
+                        options={{ icon: 'home' }}
+                    />
+                    <Tab.Screen
+                        component={Search}
+                        name="Search"
+                        Order={2}
+                        options={{ icon: 'search' }}
+                    />
+                    <Tab.Screen
+                        component={Order}
+                        name="Orders"
+                        Order={3}
+                        options={{ icon: 'receipt' }}
+                    />
+                    <Tab.Screen
+                        component={Profile}
+                        name="Profile"
+                        Order={4}
+                        options={{ icon: 'account-circle' }}
+                    />
                 </Tab.Navigator>
             ) : (
                 <LoginStack.Navigator>
