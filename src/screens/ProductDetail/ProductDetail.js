@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
-import { StatusBar, StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, View } from 'react-native'
+import { Card } from 'react-native-elements'
 import { ScrollView, TouchableHighlight } from 'react-native-gesture-handler'
-import { Card, Divider, Paragraph, Title } from 'react-native-paper'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { InputNumber } from '../../components'
 import * as handler from '../../redux/cart/index'
 
@@ -36,22 +36,21 @@ const ProductDetail = ({ route, navigation }) => {
                 contentContainerStyle={styles.children}
                 style={styles.root}
             >
-                <Card>
-                    <Card.Cover source={{ uri: product.showcase }} />
-                    <Card.Title title={product.name} />
-                    <Card.Content>
-                        <Paragraph style={styles.description}>
-                            {product.description}
-                        </Paragraph>
-                    </Card.Content>
-                    <Divider />
-                    <Card.Actions>
+                <Card containerStyle={styles.card}>
+                    <Card.Title style={styles.title}>{product.name}</Card.Title>
+                    <Card.Divider />
+                    <Card.Image source={{ uri: product.showcase }} />
+                    <Text style={styles.description}>
+                        {product.description}
+                    </Text>
+                    <Card.Divider />
+                    <View style={styles.actions}>
                         <InputNumber
                             quantity={quantity}
                             onAdd={handleAdd}
                             onSubtract={handleSubtract}
                         />
-                    </Card.Actions>
+                    </View>
                 </Card>
             </ScrollView>
             <View style={styles.footer}>
@@ -77,9 +76,24 @@ const styles = StyleSheet.create({
     children: {
         justifyContent: 'space-between',
     },
+    card: {
+        borderRadius: 10,
+    },
+    title: {
+        fontSize: 20,
+        fontWeight: 'bold',
+        textAlign: 'left',
+    },
     description: {
-        fontSize: 19,
+        padding: 10,
+        fontSize: 20,
         textAlign: 'justify',
+    },
+    actions: {
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
+        flexGrow: 1,
     },
     footer: {
         padding: 20,
