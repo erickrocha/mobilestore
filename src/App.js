@@ -6,6 +6,9 @@ import SignIn from './screens/SignIn'
 import SignUp from './screens/SignUp'
 import Profile from './screens/Profile'
 import Home from './screens/Home'
+import Search from './screens/Search'
+import Order from './screens/Order'
+
 import { createStackNavigator } from '@react-navigation/stack'
 
 import { library } from '@fortawesome/fontawesome-svg-core'
@@ -17,6 +20,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { navigationRef } from './NavigationRef'
 import * as storageService from './library/storage-service'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
+import { TabBar } from './components'
 
 const Tab = createBottomTabNavigator()
 
@@ -37,9 +41,14 @@ const App = () => {
     return (
         <NavigationContainer ref={navigationRef}>
             {isAlreadyLogged ? (
-                <Tab.Navigator>
-                    <Tab.Screen component={Home} name="Home" />
-                    <Tab.Screen component={Profile} name="Profile" />
+                <Tab.Navigator
+                    initialRouteName="Home"
+                    tabBar={(props) => <TabBar {...props} />}
+                >
+                    <Tab.Screen component={Home} name="Home" Order={1} />
+                    <Tab.Screen component={Search} name="Search" Order={2} />
+                    <Tab.Screen component={Order} name="Orders" Order={3} />
+                    <Tab.Screen component={Profile} name="Profile" Order={4} />
                 </Tab.Navigator>
             ) : (
                 <LoginStack.Navigator>
