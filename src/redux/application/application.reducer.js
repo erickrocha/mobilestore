@@ -1,7 +1,16 @@
+import { calculateCordinates, updateObject } from '../../library/utility'
 import * as action from './application.action'
 
 const initialState = {
     me: {},
+    region: {
+        latitude: -22.596482,
+        longitude: -47.4167617,
+        latitudeDelta: 0.0922,
+        longitudeDelta: 0.0421,
+    },
+    loading: false,
+    error: null,
 }
 
 const reducer = (state = initialState, payload) => {
@@ -21,6 +30,11 @@ const reducer = (state = initialState, payload) => {
                 error: payload.error,
                 success: false,
                 loading: false,
+            })
+        case action.APPLICATION_LOCATION:
+            return updateObject(state, {
+                loading: false,
+                region: calculateCordinates(payload.location),
             })
         default:
             return state

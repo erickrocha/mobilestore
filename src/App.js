@@ -16,6 +16,7 @@ import { fab } from '@fortawesome/free-brands-svg-icons'
 import { fas } from '@fortawesome/free-solid-svg-icons'
 
 import * as handler from './redux/auth/index'
+import * as appHandler from './redux/application/index'
 import { useDispatch, useSelector } from 'react-redux'
 import { navigationRef } from './NavigationRef'
 import * as storageService from './library/storage-service'
@@ -33,11 +34,17 @@ const App = () => {
 
     const dispatch = useDispatch()
 
+    const isAlreadyLogged = useSelector((state) => state.auth.token != null)
+
     useEffect(() => {
         dispatch(handler.isAlreadyLogged())
     }, [])
 
-    const isAlreadyLogged = useSelector((state) => state.auth.token != null)
+    useEffect(() => {
+        if (isAlreadyLogged) {
+            dispatch(appHandler.loadConfig())
+        }
+    }, [isAlreadyLogged])
 
     return (
         <NavigationContainer ref={navigationRef}>

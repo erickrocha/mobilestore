@@ -1,5 +1,6 @@
-import axios from 'axios.config'
+import axios from '../../axios.config'
 import * as action from './application.action'
+import Geolocation from 'react-native-geolocation-service'
 
 const error = (err) => {
     return {
@@ -20,5 +21,23 @@ export const loadConfig = () => {
                 })
             )
             .catch((err) => dispatch(error(err.response.data)))
+    }
+}
+
+export const loadLocation = () => {
+    return (dispatch) => {
+        dispatch({ type: action.APPLICATION_BEGIN })
+        Geolocation.getCurrentPosition(
+            (position) => {
+                dispatch({
+                    type: action.APPLICATION_LOCATION,
+                    location: position,
+                })
+            },
+            (err) => {
+                dispatch({ type: action.APPLICATION_ERROR, error: err })
+            },
+            { enableHighAccuracy: false, timeout: 60000, maximumAge: 1000 }
+        )
     }
 }

@@ -6,6 +6,7 @@ import * as cartHandler from '../../redux/cart/index'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { Section } from '../../components'
 import Footer from './Footer'
+import * as permissionHandler from '../../redux/permission/index'
 
 const Showcase = ({ navigation }) => {
     const sections = useSelector((state) => state.showcase.sections)
@@ -15,6 +16,11 @@ const Showcase = ({ navigation }) => {
     const renderItem = ({ item }) => <Section section={item} />
 
     const dispatch = useDispatch()
+
+    useEffect(() => {
+        dispatch(permissionHandler.getAllPermissionGranted())
+    }, [])
+
     useEffect(() => {
         dispatch(handler.get())
     }, [])
@@ -26,8 +32,8 @@ const Showcase = ({ navigation }) => {
     const footer =
         cart && cart.items && cart.items.length > 0 ? (
             <Footer
-                totalInCents={cart.totalInCents}
-                totalItemsInGrams={cart.totalItemsInGrams}
+                totalInCents={cart.totalCartInCents}
+                totalItemsInGrams={cart.totalItems}
             />
         ) : null
 

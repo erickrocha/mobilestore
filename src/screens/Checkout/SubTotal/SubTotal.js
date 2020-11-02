@@ -11,7 +11,7 @@ const SubTotal = (props) => {
             <View style={styles.row}>
                 <Text style={styles.text}>Total items</Text>
                 <Text style={styles.value}>
-                    {(cart.totalInCents / 100).toFixed(2)}
+                    {(cart.totalCartInCents / 100).toFixed(2)}
                 </Text>
             </View>
             <View style={styles.row}>
@@ -27,7 +27,7 @@ const SubTotal = (props) => {
             <View style={styles.row}>
                 <Text style={styles.text}>Total</Text>
                 <Text style={styles.value}>
-                    {(cart.totalCartInCents / 100).toFixed(2)}
+                    {(cart.finalAmountInCents / 100).toFixed(2)}
                 </Text>
             </View>
         </View>

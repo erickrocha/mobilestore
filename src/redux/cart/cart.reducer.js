@@ -6,8 +6,8 @@ const initialState = {
     error: null,
     added: false,
     itens: [],
-    totalItemsInGrams: 0.0,
-    totalInCents: 0,
+    totalItems: 0.0,
+    totalCartInCents: 0,
 }
 
 const reducer = (state = initialState, payload) => {

@@ -10,6 +10,10 @@ target 'mobilestore' do
 
   pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
 
+  permissions_path = '../node_modules/react-native-permissions/ios'
+
+  pod 'Permission-LocationWhenInUse', :path => "#{permissions_path}/LocationWhenInUse.podspec"
+
   target 'mobilestoreTests' do
     inherit! :complete
     # Pods for testing

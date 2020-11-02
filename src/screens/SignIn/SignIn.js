@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { SafeAreaView, StyleSheet, Text, View } from 'react-native'
 import { Input, Button, Icon } from 'react-native-elements'
 import { useDispatch, useSelector } from 'react-redux'
@@ -6,6 +6,8 @@ import * as handler from '../../redux/auth/index'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { clientId } from '../../../app.json'
 import { FlashMessage } from '../../components'
+import { PERMISSIONS, check, RESULTS, request } from 'react-native-permissions'
+import * as permissionService from '../../library/permission-service'
 
 const SignIn = ({ route, navigation }) => {
     const [email, setEmail] = useState(route.params?.email)
