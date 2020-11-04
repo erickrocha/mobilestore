@@ -1,1 +1,1 @@
-export { loadConfig, loadLocation } from './application.handler'
+export { loadConfig, loadLocation, setAddress } from './application.handler'

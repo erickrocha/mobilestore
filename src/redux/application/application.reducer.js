@@ -3,12 +3,7 @@ import * as action from './application.action'
 
 const initialState = {
     me: {},
-    region: {
-        latitude: -22.596482,
-        longitude: -47.4167617,
-        latitudeDelta: 0.0922,
-        longitudeDelta: 0.0421,
-    },
+    address: null,
     loading: false,
     error: null,
 }
@@ -31,11 +26,11 @@ const reducer = (state = initialState, payload) => {
                 success: false,
                 loading: false,
             })
-        case action.APPLICATION_LOCATION:
+        case action.SET_DELIVERY_ADDRESS: {
             return updateObject(state, {
-                loading: false,
-                region: calculateCordinates(payload.location),
+                address: payload.address,
             })
+        }
         default:
             return state
     }

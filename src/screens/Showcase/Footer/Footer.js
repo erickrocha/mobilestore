@@ -2,17 +2,22 @@ import { useNavigation } from '@react-navigation/native'
 import React from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 import { TouchableHighlight } from 'react-native-gesture-handler'
+import { useSelector } from 'react-redux'
 
 const Footer = (props) => {
     const { totalInCents, totalItemsInGrams } = props
 
     const navigation = useNavigation()
 
+    const hasDeliveryAddres = useSelector((state) => state.app.address != null)
+
     return (
         <TouchableHighlight
             activeOpacity={0.6}
             underlayColor="#DDDDDD"
-            onPress={() => navigation.navigate('Checkout')}
+            onPress={() =>
+                navigation.navigate(hasDeliveryAddres ? 'Checkout' : 'Address')
+            }
             style={styles.root}
         >
             <View style={styles.button}>

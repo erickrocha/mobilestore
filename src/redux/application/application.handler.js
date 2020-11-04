@@ -1,6 +1,6 @@
 import axios from '../../axios.config'
 import * as action from './application.action'
-import Geolocation from 'react-native-geolocation-service'
+import * as navigation from '../../NavigationRef'
 
 const error = (err) => {
     return {
@@ -24,20 +24,9 @@ export const loadConfig = () => {
     }
 }
 
-export const loadLocation = () => {
+export const setAddress = (address) => {
     return (dispatch) => {
-        dispatch({ type: action.APPLICATION_BEGIN })
-        Geolocation.getCurrentPosition(
-            (position) => {
-                dispatch({
-                    type: action.APPLICATION_LOCATION,
-                    location: position,
-                })
-            },
-            (err) => {
-                dispatch({ type: action.APPLICATION_ERROR, error: err })
-            },
-            { enableHighAccuracy: false, timeout: 60000, maximumAge: 1000 }
-        )
+        dispatch({ type: action.SET_DELIVERY_ADDRESS, address: address })
+        navigation.navigate('Checkout')
     }
 }
