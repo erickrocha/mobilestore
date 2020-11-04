@@ -10,6 +10,7 @@ import Payment from './Payment'
 import Promotion from './Promotion'
 import SubTotal from './SubTotal'
 import * as handler from '../../redux/cart/index'
+import OrderButton from './OrderButton'
 
 const Checkout = (props) => {
     const cart = useSelector((state) => state.cart)
@@ -20,7 +21,7 @@ const Checkout = (props) => {
     }, [])
 
     return (
-        <SafeAreaView>
+        <SafeAreaView style={styles.root}>
             <ScrollView>
                 <Address />
                 <Divider />
@@ -30,6 +31,7 @@ const Checkout = (props) => {
                 <Divider />
                 <Payment />
             </ScrollView>
+            <OrderButton />
         </SafeAreaView>
     )
 }
