@@ -3,12 +3,13 @@ import { StyleSheet, Text, View } from 'react-native'
 import { TouchableHighlight } from 'react-native-gesture-handler'
 
 const OrderButton = (props) => {
-    const { onConfirm } = props
+    const { onGoTo } = props
+
     return (
         <TouchableHighlight
             activeOpacity={0.6}
             underlayColor="#DDDDDD"
-            onPress={() => onConfirm(true)}
+            onPress={() => onGoTo()}
             style={styles.root}
         >
             <View style={styles.buttonContainer}>

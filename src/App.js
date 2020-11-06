@@ -8,6 +8,8 @@ import Profile from './screens/Profile'
 import Home from './screens/Home'
 import Search from './screens/Search'
 import Order from './screens/Order'
+import Checkout from './screens/Checkout'
+import Sumary from './screens/Sumary'
 
 import { createStackNavigator } from '@react-navigation/stack'
 
@@ -26,6 +28,42 @@ import { TabBar } from './components'
 const Tab = createBottomTabNavigator()
 
 const LoginStack = createStackNavigator()
+
+const AppStack = createStackNavigator()
+
+function Store() {
+    return (
+        <Tab.Navigator
+            initialRouteName="Home"
+            tabBar={(props) => <TabBar {...props} />}
+        >
+            <Tab.Screen
+                component={Home}
+                name="Home"
+                Order={1}
+                options={{ icon: 'home' }}
+            />
+            <Tab.Screen
+                component={Search}
+                name="Search"
+                Order={2}
+                options={{ icon: 'search' }}
+            />
+            <Tab.Screen
+                component={Order}
+                name="Orders"
+                Order={3}
+                options={{ icon: 'receipt' }}
+            />
+            <Tab.Screen
+                component={Profile}
+                name="Profile"
+                Order={4}
+                options={{ icon: 'account-circle' }}
+            />
+        </Tab.Navigator>
+    )
+}
 
 library.add(fab, fas)
 
@@ -49,35 +87,15 @@ const App = () => {
     return (
         <NavigationContainer ref={navigationRef}>
             {isAlreadyLogged ? (
-                <Tab.Navigator
-                    initialRouteName="Home"
-                    tabBar={(props) => <TabBar {...props} />}
-                >
-                    <Tab.Screen
-                        component={Home}
-                        name="Home"
-                        Order={1}
-                        options={{ icon: 'home' }}
+                <AppStack.Navigator>
+                    <AppStack.Screen
+                        name="store"
+                        component={Store}
+                        options={{ headerShown: false }}
                     />
-                    <Tab.Screen
-                        component={Search}
-                        name="Search"
-                        Order={2}
-                        options={{ icon: 'search' }}
-                    />
-                    <Tab.Screen
-                        component={Order}
-                        name="Orders"
-                        Order={3}
-                        options={{ icon: 'receipt' }}
-                    />
-                    <Tab.Screen
-                        component={Profile}
-                        name="Profile"
-                        Order={4}
-                        options={{ icon: 'account-circle' }}
-                    />
-                </Tab.Navigator>
+                    <AppStack.Screen name="Checkout" component={Checkout} />
+                    <AppStack.Screen name="Sumary" component={Sumary} />
+                </AppStack.Navigator>
             ) : (
                 <LoginStack.Navigator>
                     <LoginStack.Screen
