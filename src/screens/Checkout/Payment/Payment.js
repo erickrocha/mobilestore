@@ -5,6 +5,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { Input } from 'react-native-elements'
 
 const Payment = (props) => {
+    const { payent, setPayment } = props
+
     return (
         <View style={styles.root}>
             <Title title="Forma de pagamento" />

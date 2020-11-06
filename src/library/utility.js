@@ -21,6 +21,5 @@ export const calculateCordinates = (details) => {
         latitudeDelta: latDelta,
         longitudeDelta: lngDelta,
     }
-    console.log(region)
     return region
 }

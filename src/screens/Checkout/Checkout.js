@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { StyleSheet, Text, View } from 'react-native'
-import { Divider } from 'react-native-elements'
+import { Divider, Overlay } from 'react-native-elements'
 import { ScrollView } from 'react-native-gesture-handler'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { useDispatch, useSelector } from 'react-redux'
@@ -11,9 +11,13 @@ import Promotion from './Promotion'
 import SubTotal from './SubTotal'
 import * as handler from '../../redux/cart/index'
 import OrderButton from './OrderButton'
+import Sumary from './Sumary'
 
 const Checkout = (props) => {
     const cart = useSelector((state) => state.cart)
+    const [confirm, setConfirm] = useState(false)
+    const [payment, setPayment] = useState({})
+    const address = useSelector((state) => state.app.address)
 
     const dispatch = useDispatch()
     useEffect(() => {
@@ -29,9 +33,15 @@ const Checkout = (props) => {
                 <Divider />
                 <SubTotal cart={cart} />
                 <Divider />
-                <Payment />
+                <Payment payment={payment} setPayment={setPayment} />
             </ScrollView>
-            <OrderButton />
+            <OrderButton onConfirm={setConfirm} />
+            <Sumary
+                isVisible={confirm}
+                setVisible={setConfirm}
+                cart={cart}
+                address={address}
+            />
         </SafeAreaView>
     )
 }
