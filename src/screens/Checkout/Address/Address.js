@@ -7,8 +7,7 @@ import { PERMISSIONS } from 'react-native-permissions'
 import { calculateCordinates } from '../../../library/utility'
 
 const Address = (props) => {
-    const address = useSelector((state) => state.app.address)
-
+    const { address } = props
     const region = calculateCordinates(address)
 
     return (

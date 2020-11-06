@@ -11,11 +11,9 @@ import Promotion from './Promotion'
 import SubTotal from './SubTotal'
 import * as handler from '../../redux/cart/index'
 import OrderButton from './OrderButton'
-import Sumary from './Sumary'
 
-const Checkout = (props) => {
+const Checkout = ({ navigation }) => {
     const cart = useSelector((state) => state.cart)
-    const [confirm, setConfirm] = useState(false)
     const [payment, setPayment] = useState({})
     const address = useSelector((state) => state.app.address)
 
@@ -24,24 +22,22 @@ const Checkout = (props) => {
         dispatch(handler.get())
     }, [])
 
+    const goTo = () => {
+        navigation.navigate('Sumary')
+    }
+
     return (
         <SafeAreaView style={styles.root}>
             <ScrollView>
-                <Address />
+                <Address address={address} />
                 <Divider />
                 <ListItem items={cart.items} />
                 <Divider />
                 <SubTotal cart={cart} />
                 <Divider />
                 <Payment payment={payment} setPayment={setPayment} />
+                <OrderButton onGoTo={goTo} />
             </ScrollView>
-            <OrderButton onConfirm={setConfirm} />
-            <Sumary
-                isVisible={confirm}
-                setVisible={setConfirm}
-                cart={cart}
-                address={address}
-            />
         </SafeAreaView>
     )
 }

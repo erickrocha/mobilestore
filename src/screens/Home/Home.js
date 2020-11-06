@@ -1,7 +1,6 @@
 import React from 'react'
 import Showcase from '../Showcase'
 import ProductDetail from '../ProductDetail'
-import Checkout from '../Checkout'
 import Address from '../Address'
 import { createStackNavigator } from '@react-navigation/stack'
 
@@ -29,7 +28,6 @@ const Home = () => {
                     title: 'Endereço de entrega',
                 })}
             />
-            <Stack.Screen name="Checkout" component={Checkout} />
         </Stack.Navigator>
     )
 }
