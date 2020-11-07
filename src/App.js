@@ -10,6 +10,7 @@ import Search from './screens/Search'
 import Order from './screens/Order'
 import Checkout from './screens/Checkout'
 import Sumary from './screens/Sumary'
+import Wallet from './screens/Wallet'
 
 import { createStackNavigator } from '@react-navigation/stack'
 
@@ -95,6 +96,11 @@ const App = () => {
                     />
                     <AppStack.Screen name="Checkout" component={Checkout} />
                     <AppStack.Screen name="Sumary" component={Sumary} />
+                    <AppStack.Screen
+                        name="Wallet"
+                        component={Wallet}
+                        options={{ headerShown: false }}
+                    />
                 </AppStack.Navigator>
             ) : (
                 <LoginStack.Navigator>

@@ -16,6 +16,7 @@ const Checkout = ({ navigation }) => {
     const cart = useSelector((state) => state.cart)
     const [payment, setPayment] = useState({})
     const address = useSelector((state) => state.app.address)
+    const availables = useSelector((state) => state.app.payments)
 
     const dispatch = useDispatch()
     useEffect(() => {
@@ -35,7 +36,11 @@ const Checkout = ({ navigation }) => {
                 <Divider />
                 <SubTotal cart={cart} />
                 <Divider />
-                <Payment payment={payment} setPayment={setPayment} />
+                <Payment
+                    availabes={availables}
+                    payment={payment}
+                    setPayment={setPayment}
+                />
                 <OrderButton onGoTo={goTo} />
             </ScrollView>
         </SafeAreaView>
