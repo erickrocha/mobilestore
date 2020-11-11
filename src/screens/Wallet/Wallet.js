@@ -5,6 +5,7 @@ import { StyleSheet, Text, View } from 'react-native'
 import { Divider, Icon } from 'react-native-elements'
 import { TouchableHighlight } from 'react-native-gesture-handler'
 import { useSelector } from 'react-redux'
+import { CardList } from './components'
 
 const Wallet = (props) => {
     const navigation = useNavigation()
@@ -31,11 +32,22 @@ const Wallet = (props) => {
                 </Text>
             </View>
             <Divider />
-            {availables.map((payment) => (
-                <View key={payment.method}>
-                    <Text>{payment.label}</Text>
-                </View>
-            ))}
+            {availables.map((payment) => {
+                switch (payment.method) {
+                    case 'CREDIT_CARD':
+                        return <CardList key={payment.method} />
+                    case 'DEBIT_CARD':
+                        return <CardList key={payment.method} />
+                    default:
+                        return (
+                            <View key={payment.method} style={styles.item}>
+                                <Text style={styles.itemLabel}>
+                                    {payment.label}
+                                </Text>
+                            </View>
+                        )
+                }
+            })}
         </View>
     )
 }
@@ -48,6 +60,12 @@ const styles = StyleSheet.create({
         marginTop: 15,
         flexDirection: 'row',
         marginBottom: 10,
+    },
+    item: {
+        padding: 15,
+    },
+    itemLabel: {
+        fontSize: 18,
     },
 })
 

@@ -11,6 +11,7 @@ import Order from './screens/Order'
 import Checkout from './screens/Checkout'
 import Sumary from './screens/Sumary'
 import Wallet from './screens/Wallet'
+import Card from './screens/Card'
 
 import { createStackNavigator } from '@react-navigation/stack'
 
@@ -101,6 +102,7 @@ const App = () => {
                         component={Wallet}
                         options={{ headerShown: false }}
                     />
+                    <AppStack.Screen name="Card" component={Card} />
                 </AppStack.Navigator>
             ) : (
                 <LoginStack.Navigator>

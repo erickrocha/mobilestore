@@ -32,12 +32,12 @@ const Payment = (props) => {
                 <View style={styles.payment}>
                     <FontAwesomeIcon
                         icon={
-                            payment.icon ? payment.icon : ['fa', 'money-bill']
+                            payment?.icon ? payment.icon : ['fa', 'money-bill']
                         }
                         style={styles.money}
                         size={36}
                     />
-                    <Text style={styles.label}>{payment.label}</Text>
+                    <Text style={styles.label}>{payment?.label}</Text>
                     <FontAwesomeIcon
                         icon={['fa', 'exchange-alt']}
                         style={styles.money}
