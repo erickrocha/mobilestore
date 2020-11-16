@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { SafeAreaView, StyleSheet, View } from 'react-native'
 import { Button, Icon, Input } from 'react-native-elements'
+import { useDispatch, useSelector } from 'react-redux'
 import validate from 'validate.js'
+import * as cryptoService from '../../library/cripto-service'
+import * as handler from '../../redux/customer/index'
 
 const schema = {
     cardNumber: {
@@ -56,10 +59,15 @@ const Card = (props) => {
         }))
     }
 
+    const publicKey = useSelector((state) => state.app.publicKey)
+
+    const dispatch = useDispatch()
+
     const submit = () => {
         const errors = validate(card.values, schema)
         if (!errors) {
-            alert(JSON.stringify(card))
+            const encryptedCard = cryptoService.encrypt(card.values, publicKey)
+            dispatch(handler.addCard(encryptedCard))
         }
     }
 

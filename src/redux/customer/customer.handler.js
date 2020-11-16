@@ -44,3 +44,21 @@ export const save = (customerData) => {
             })
     }
 }
+
+export const addCard = (card) => {
+    return (dispatch) => {
+        dispatch({ type: action.CUSTOMER_BEGIN })
+        axios
+            .post('/mobile/crm/customers/card', card)
+            .then((response) => {
+                dispatch({
+                    type: action.CUSTOMER_ADDED,
+                    customer: response.data,
+                })
+                navigation.goBack()
+            })
+            .catch((err) => {
+                dispatch(error(err.response.data))
+            })
+    }
+}
