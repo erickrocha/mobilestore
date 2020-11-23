@@ -1,15 +1,18 @@
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
-import { useNavigation } from '@react-navigation/native'
 import React from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 import { Divider, Icon } from 'react-native-elements'
-import { TouchableHighlight } from 'react-native-gesture-handler'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { CardList } from './components'
+import * as handler from '../../redux/cart/index'
 
-const Wallet = (props) => {
-    const navigation = useNavigation()
+const Wallet = ({ navigation }) => {
     const availables = useSelector((state) => state.app.payments)
+
+    const dispatch = useDispatch()
+    const setPayment = (payment) => {
+        dispatch(handler.setPayment(payment))
+    }
 
     return (
         <View style={styles.root}>
@@ -35,9 +38,19 @@ const Wallet = (props) => {
             {availables.map((payment) => {
                 switch (payment.method) {
                     case 'CREDIT_CARD':
-                        return <CardList key={payment.method} />
+                        return (
+                            <CardList
+                                key={payment.method}
+                                setPayment={setPayment}
+                            />
+                        )
                     case 'DEBIT_CARD':
-                        return <CardList key={payment.method} />
+                        return (
+                            <CardList
+                                key={payment.method}
+                                setPayment={setPayment}
+                            />
+                        )
                     default:
                         return (
                             <View key={payment.method} style={styles.item}>

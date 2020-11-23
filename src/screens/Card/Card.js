@@ -22,7 +22,7 @@ const schema = {
             message: 'Código verificador é obrigatório',
         },
     },
-    cardholder: {
+    cardHolder: {
         presence: { allowEmpty: false, message: 'Nome é obrigatório' },
     },
 }
@@ -66,7 +66,10 @@ const Card = (props) => {
     const submit = () => {
         const errors = validate(card.values, schema)
         if (!errors) {
-            const encryptedCard = cryptoService.encrypt(card.values, publicKey)
+            const encryptedCard = cryptoService.encryptFields(
+                card.values,
+                publicKey
+            )
             dispatch(handler.addCard(encryptedCard))
         }
     }
@@ -77,6 +80,22 @@ const Card = (props) => {
     return (
         <SafeAreaView style={styles.root}>
             <View>
+                <Input
+                    placeholder="Nome no cartão"
+                    inputStyle={{ fontSize: 20 }}
+                    containerStyle={{ marginTop: 20, marginBottom: 20 }}
+                    leftIcon={{ type: 'font-awesome', name: 'user' }}
+                    value={card.values.cardHolder || ''}
+                    renderErrorMessage={hasError('cardHolder')}
+                    errorMessage={
+                        hasError('cardHolder')
+                            ? card.errors.cardHolder[0]
+                            : null
+                    }
+                    nativeID="cardHolder"
+                    name="cardHolder"
+                    onChangeText={(text) => handleChange('cardHolder', text)}
+                />
                 <Input
                     inputStyle={{ fontSize: 20 }}
                     containerStyle={{ marginTop: 20, marginBottom: 20 }}
@@ -146,22 +165,7 @@ const Card = (props) => {
                         }
                     />
                 </View>
-                <Input
-                    placeholder="Nome no cartão"
-                    inputStyle={{ fontSize: 20 }}
-                    containerStyle={{ marginTop: 20, marginBottom: 20 }}
-                    leftIcon={{ type: 'font-awesome', name: 'user' }}
-                    value={card.values.cardholder || ''}
-                    renderErrorMessage={hasError('cardholder')}
-                    errorMessage={
-                        hasError('cardholder')
-                            ? card.errors.cardholder[0]
-                            : null
-                    }
-                    nativeID="cardholder"
-                    name="cardholder"
-                    onChangeText={(text) => handleChange('cardholder', text)}
-                />
+
                 <Button
                     disabled={!card.isValid}
                     containerStyle={{ padding: 10, marginTop: 20 }}

@@ -8,6 +8,7 @@ const initialState = {
     itens: [],
     totalItems: 0.0,
     totalCartInCents: 0,
+    payment: {},
 }
 
 const reducer = (state = initialState, payload) => {
@@ -20,6 +21,8 @@ const reducer = (state = initialState, payload) => {
             return updateObject(state, { ...payload.cart, added: true })
         case action.GET_CART:
             return updateObject(state, { ...payload.cart, loading: false })
+        case action.SET_PAYMENT:
+            return updateObject(state, payload.payment)
         default:
             return state
     }

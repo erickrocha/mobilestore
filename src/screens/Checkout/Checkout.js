@@ -14,7 +14,7 @@ import OrderButton from './OrderButton'
 
 const Checkout = ({ navigation }) => {
     const cart = useSelector((state) => state.cart)
-    const [payment, setPayment] = useState({})
+    const [payment, setPayment] = useState(cart?.payment || {})
     const address = useSelector((state) => state.app.address)
     const availables = useSelector((state) => state.app.payments)
 

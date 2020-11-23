@@ -1,1 +1,1 @@
-export { addItem, get } from './cart.handler'
+export { addItem, get, setPayment } from './cart.handler'
