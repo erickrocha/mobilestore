@@ -1,13 +1,13 @@
 import React from 'react'
 import { StyleSheet, Text, View } from 'react-native'
-import Title from '../../../components/Title'
+import Title from '../Title'
 
 const ListItem = (props) => {
-    const { items } = props
+    const { items, title } = props
 
     return (
         <View style={styles.root}>
-            <Title title="Seu pedido" />
+            <Title title={title} />
             {items.map((item) => (
                 <View key={item.id} style={styles.item}>
                     <Text>{item.quantityInGrams}X</Text>
@@ -21,18 +21,11 @@ const ListItem = (props) => {
 
 const styles = StyleSheet.create({
     root: {
-        padding: 15,
-        flex: 1,
-        flexGrow: 1,
+        padding: 5,
     },
     title: {
         flexGrow: 1,
         flexDirection: 'row',
-    },
-    titleLabel: {
-        fontSize: 20,
-        fontWeight: 'bold',
-        fontFamily: 'roboto',
     },
     item: {
         padding: 10,
