@@ -21,6 +21,7 @@ import { fas } from '@fortawesome/free-solid-svg-icons'
 
 import * as handler from './redux/auth/index'
 import * as appHandler from './redux/application/index'
+import * as customerHandler from './redux/customer/index'
 import { useDispatch, useSelector } from 'react-redux'
 import { navigationRef } from './NavigationRef'
 import * as storageService from './library/storage-service'
@@ -83,6 +84,12 @@ const App = () => {
     useEffect(() => {
         if (isAlreadyLogged) {
             dispatch(appHandler.loadConfig())
+        }
+    }, [isAlreadyLogged])
+
+    useEffect(() => {
+        if (isAlreadyLogged) {
+            dispatch(customerHandler.get())
         }
     }, [isAlreadyLogged])
 

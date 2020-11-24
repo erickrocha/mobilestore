@@ -10,7 +10,7 @@ import {
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete'
 import { useDispatch } from 'react-redux'
 navigator.geolocation = require('react-native-geolocation-service')
-import * as handler from '../../redux/application/index'
+import * as handler from '../../redux/customer/index'
 import MapView, { PROVIDER_GOOGLE } from 'react-native-maps'
 import { calculateCordinates } from '../../library/utility'
 

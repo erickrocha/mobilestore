@@ -6,6 +6,7 @@ const initsitalState = {
     error: null,
     customer: {},
     saved: false,
+    address: null,
 }
 
 const reducer = (state = initsitalState, payload) => {
@@ -26,6 +27,11 @@ const reducer = (state = initsitalState, payload) => {
                 loading: false,
                 saved: false,
             })
+        case action.SET_CUSTOMER_ADDRESS: {
+            return updateObject(state, {
+                address: payload.address,
+            })
+        }
         default:
             return state
     }

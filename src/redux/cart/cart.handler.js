@@ -41,7 +41,7 @@ export const get = () => {
 
 export const setPayment = (payment) => {
     return (dispatch) => {
-        dispacth({ type: action.CART_BEGIN })
+        dispatch({ type: action.CART_BEGIN })
         dispatch({ type: action.SET_PAYMENT, payment: payment })
         navigation.goBack()
     }

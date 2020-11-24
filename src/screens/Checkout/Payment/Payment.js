@@ -1,23 +1,28 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 import Title from '../../../components/Title'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { TouchableHighlight } from 'react-native-gesture-handler'
 import { useNavigation } from '@react-navigation/native'
+import { useSelector } from 'react-redux'
 
 const Payment = (props) => {
-    const { availabes, payment, setPayment } = props
+    const { availabes } = props
     const navigation = useNavigation()
+    const [payment, setPayment] = useState({})
 
-    const handleSelectted = (method) => {
-        const seledted = availabes.find(
+    const handleSelected = (method) => {
+        const selected = availabes.find(
             (available) => available.method === method
         )
-        setPayment(seledted)
+        console.log(selected)
+        setPayment(selected)
     }
 
+    const cart = useSelector((state) => state.cart)
+
     useEffect(() => {
-        handleSelectted('PIX')
+        handleSelected(cart?.payment?.method)
     }, [])
 
     return (

@@ -9,7 +9,9 @@ const Footer = (props) => {
 
     const navigation = useNavigation()
 
-    const hasDeliveryAddres = useSelector((state) => state.app.address != null)
+    const hasDeliveryAddres = useSelector(
+        (state) => state.customer.address != null
+    )
 
     return (
         <TouchableHighlight

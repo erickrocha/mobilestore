@@ -62,3 +62,10 @@ export const addCard = (card) => {
             })
     }
 }
+
+export const setAddress = (address) => {
+    return (dispatch) => {
+        dispatch({ type: action.SET_CUSTOMER_ADDRESS, address: address })
+        navigation.navigate('Checkout')
+    }
+}

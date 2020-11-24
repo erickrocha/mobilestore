@@ -1,1 +1,1 @@
-export { save, get, addCard } from './customer.handler'
+export { save, get, addCard, setAddress } from './customer.handler'

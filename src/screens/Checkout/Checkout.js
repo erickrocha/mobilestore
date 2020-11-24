@@ -14,8 +14,7 @@ import OrderButton from './OrderButton'
 
 const Checkout = ({ navigation }) => {
     const cart = useSelector((state) => state.cart)
-    const [payment, setPayment] = useState(cart?.payment || {})
-    const address = useSelector((state) => state.app.address)
+    const address = useSelector((state) => state.customer.address)
     const availables = useSelector((state) => state.app.payments)
 
     const dispatch = useDispatch()
@@ -36,11 +35,7 @@ const Checkout = ({ navigation }) => {
                 <Divider />
                 <SubTotal cart={cart} />
                 <Divider />
-                <Payment
-                    availabes={availables}
-                    payment={payment}
-                    setPayment={setPayment}
-                />
+                <Payment availabes={availables} />
                 <OrderButton onGoTo={goTo} />
             </ScrollView>
         </SafeAreaView>
