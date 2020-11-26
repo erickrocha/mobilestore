@@ -17,6 +17,7 @@ import {
     faEye,
     faWindowClose,
     faTimesCircle,
+    faCheckDouble,
 } from '@fortawesome/free-solid-svg-icons'
 
 library.add(
@@ -34,5 +35,6 @@ library.add(
     faExchangeAlt,
     faUserCircle,
     faEye,
-    faTimesCircle
+    faTimesCircle,
+    faCheckDouble
 )

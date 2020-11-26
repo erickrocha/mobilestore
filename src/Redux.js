@@ -10,6 +10,7 @@ import authReducer from './redux/auth/auth.reducer'
 import customerReducer from './redux/customer/customer.reducer'
 import applicationReducer from './redux/application/application.reducer'
 import permissionReducer from './redux/permission/permission.reducer'
+import orderReducer from './redux/order/order.reducer'
 
 import { composeWithDevTools } from 'redux-devtools-extension'
 
@@ -25,6 +26,7 @@ const appReducer = combineReducers({
     cart: cartReducer,
     customer: customerReducer,
     permission: permissionReducer,
+    order: orderReducer,
 })
 
 const store = createStore(appReducer, composeEnhancers(applyMiddleware(thunk)))
