@@ -1,24 +1,23 @@
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import React from 'react'
-import { ActivityIndicator, Modal, StyleSheet, View } from 'react-native'
+import { ActivityIndicator, Modal, StyleSheet, Text, View } from 'react-native'
 
-const Waiting = (props) => {
-    const { waiting } = props
-
+const Waiting = () => {
     return (
         <View style={styles.root}>
-            <Modal animationType="slide" transparent={true} visible={waiting}>
-                <View style={styles.modalBody}>
-                    {waiting ? (
-                        <ActivityIndicator size={50} color="blue" />
-                    ) : (
-                        <FontAwesomeIcon
-                            icon={['fa', 'check-circle']}
-                            size={50}
-                        />
-                    )}
+            <View style={styles.modalBody}>
+                <View>
+                    <Text>Aguarde enquanto processamos seu pedido</Text>
                 </View>
-            </Modal>
+                <ActivityIndicator
+                    style={styles.indicator}
+                    size={50}
+                    color="blue"
+                />
+                <View>
+                    <Text>Isso pode levar alguns segundos</Text>
+                </View>
+            </View>
         </View>
     )
 }
@@ -28,7 +27,7 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        marginTop: 22,
+        backgroundColor: 'rgba(0,0,0,0.5)',
     },
     modalBody: {
         margin: 20,
@@ -44,6 +43,9 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.25,
         shadowRadius: 3.84,
         elevation: 5,
+    },
+    indicator: {
+        padding: 50,
     },
 })
 

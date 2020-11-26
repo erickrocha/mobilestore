@@ -17,17 +17,28 @@ import * as handler from '../../redux/order/index'
 
 const Sumary = (props) => {
     const cart = useSelector((state) => state.cart)
+    const customer = useSelector((state) => state.customer.customer)
+    const company = useSelector((state) => state.app.id)
     const address = useSelector((state) => state.customer.address)
     const waiting = useSelector((state) => state.order.loading)
 
     const dispatch = useDispatch()
     const executeOrder = () => {
-        dispatch(handler.execute({}))
+        const order = {
+            company: company,
+            customer: customer.id,
+            address: {
+                formatted_address: address.formatted_address,
+                address_components: address.address_components,
+            },
+            cart: cart.id,
+            payment: cart.payment.id,
+        }
+        dispatch(handler.execute(order))
     }
 
     return (
         <SafeAreaView style={styles.root}>
-            <Waiting waiting={waiting} />
             <ScrollView>
                 {/* <PersonalData title="Dados Pessoais" person={customer} /> */}
                 <View>
