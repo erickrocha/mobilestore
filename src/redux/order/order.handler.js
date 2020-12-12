@@ -14,13 +14,13 @@ export const execute = (order) => {
     return (dispatch) => {
         dispatch({ type: action.ORDER_BEGIN })
         navigation.navigate('Approval')
-        console.log(JSON.stringify(order))
-        // axios.post("/api/mobile/order", order)
-        //   .then(response => {
-        //     dispatch({ type: action.ORDERED, order: response.data })
-        //   })
-        //   .catch(err => {
-        //     dispatch(error(err.response.data))
-        //   })
+        axios
+            .post('/mobile/order', order)
+            .then((response) => {
+                dispatch({ type: action.ORDERED, order: response.data })
+            })
+            .catch((err) => {
+                dispatch(error(err.response.data))
+            })
     }
 }

@@ -33,6 +33,7 @@ const Sumary = (props) => {
             },
             cart: cart.id,
             payment: cart.payment.id,
+            paymentMethod: cart.payment.method,
         }
         dispatch(handler.execute(order))
     }

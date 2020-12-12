@@ -3,7 +3,7 @@ import * as storageService from './library/storage-service'
 import { clientId } from '../app.json'
 
 const instance = axios.create({
-    baseURL: 'http://192.168.1.3:8080/hermes',
+    baseURL: 'http://192.168.122.1:8080/hermes',
     headers: { 'Content-Type': 'application/json' },
 })
 
