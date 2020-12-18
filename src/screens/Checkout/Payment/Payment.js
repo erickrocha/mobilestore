@@ -15,7 +15,6 @@ const Payment = (props) => {
         const selected = availabes.find(
             (available) => available.method === method
         )
-        console.log(selected)
         setPayment(selected)
     }
 

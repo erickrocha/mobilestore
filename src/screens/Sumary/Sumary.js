@@ -20,7 +20,6 @@ const Sumary = (props) => {
     const customer = useSelector((state) => state.customer.customer)
     const company = useSelector((state) => state.app.id)
     const address = useSelector((state) => state.customer.address)
-    const waiting = useSelector((state) => state.order.loading)
 
     const dispatch = useDispatch()
     const executeOrder = () => {
@@ -35,6 +34,7 @@ const Sumary = (props) => {
             payment: cart.payment.id,
             paymentMethod: cart.payment.method,
         }
+        console.log(JSON.stringify(order))
         dispatch(handler.execute(order))
     }
 

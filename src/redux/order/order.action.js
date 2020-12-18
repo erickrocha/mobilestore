@@ -1,3 +1,3 @@
-export const ORDER_BEGIN = 'CHECKOUT_BEGIN'
-export const ORDER_ERROR = 'CHECKOUT_ERROR'
+export const ORDER_BEGIN = 'ORDER_BEGIN'
+export const ORDER_ERROR = 'ORDER_ERROR'
 export const ORDERED = 'ORDERED'

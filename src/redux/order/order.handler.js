@@ -12,8 +12,8 @@ const error = (error) => {
 
 export const execute = (order) => {
     return (dispatch) => {
-        dispatch({ type: action.ORDER_BEGIN })
         navigation.navigate('Approval')
+        dispatch({ type: action.ORDER_BEGIN })
         axios
             .post('/mobile/order', order)
             .then((response) => {

@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { View } from 'react-native'
 import { Text } from 'react-native'
 import { StyleSheet } from 'react-native'
@@ -15,18 +15,8 @@ const Approval = ({ navigation }) => {
         (currrent) => currrent.method === order?.paymentMethod
     )
 
-    const [countDown, setCountDown] = useState(5)
-
-    setTimeout(() => {
-        setCountDown(countDown - 1)
-    }, 1000)
-
     const goToHome = () => {
         navigation.navigate('Home')
-    }
-
-    if (countDown == 0) {
-        goToHome()
     }
 
     if (waiting) {
@@ -62,7 +52,7 @@ const Approval = ({ navigation }) => {
                             style={styles.card}
                         />
                         <Text style={{ margin: 10, fontSize: 25 }}>
-                            {order.card.label}
+                            {order.payment.label}
                         </Text>
                         <Text style={{ fontSize: 25 }}>{`R$ ${(
                             order.cart.finalAmountInCents / 100
@@ -81,7 +71,7 @@ const Approval = ({ navigation }) => {
                     }}
                 >
                     <Button
-                        title={`Ir para loja ${countDown}`}
+                        title={`Ir para loja`}
                         containerStyle={{ flex: 1 }}
                         titleStyle={{ fontSize: 25 }}
                         onPress={() => goToHome()}
